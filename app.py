@@ -226,7 +226,7 @@ elif aceite_tcle == "Aceito e sou maior de 18 anos":
         if submit_button:
             with st.spinner("Salvando respostas no banco de dados..."):
                 try:
-                    cliente = gspread.service_account(filename="credenciais.json")
+                    cliente = gspread.service_account_from_dict(st.secrets["gcp_service_account"])
                     
                     # LINK DA PLANILHA (SEGURO)
                     link_da_sua_planilha = "https://docs.google.com/spreadsheets/d/1FoXC3MIutbs0Ri4MxVKLf0E7fo91ODgTVx6au_P6NYU/edit?usp=sharing"
