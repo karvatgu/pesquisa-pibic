@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "speedy-post-492300-k4",
+  "private_key_id": "498ea2a049222a9949c542d0ba4f8306e41d2762",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQD0OtuugIM7GC/v\nD5HalRt6+RkwDNO3H56LV4O7N9L9zNeG6t7nYYzqCR9Rt7LpPIx8c6vEwOSAgBfH\nPjHOoWVi6paa0fdtDZinDZE8bkwBtBek6phH23RG0CqdI7d1A2UvdMh+iB+x4NC9\nB80nF2n5mGh6ntRwjVFRkg4dfbh04hQdjhG7drWQIfqHVR10WqMz0OPSbnqgSYJ9\n3reJsXVcJx3LNtiAUgblxBh3Hmqh07fXS/0LqaLSPMwTbH6rXD+/9b0X3PcelF24\nGRBKm7MMJLPOnIyFeZBWv3kUtgzKa2q3BpOm8qFGC6I4KqY3pjXD5MwJVReHlW06\nXFtQlMO7AgMBAAECggEAN0bPC9rYWNqrlq7ucwuGcbnJYp+0l2DXsG/5R7llzr27\nFjU4iCQDEcFIzmUGYFWs8kn32YtS7GaRey3vdfX/jXjM53OYTZ1jLIQcmBHasBQD\nufbCypi344Mf8frwfdJr52bGLiU/DzJz7CTE4REikjRViVNDf8nsWsr02OXohsNn\nVdE3GOLyT06lSMnAHswWxdOkyv9/DuZMZpfAIYyMcSwnh9lCsmleUW0xhu3RePaP\nj+7VMhwhic46dgTyMgpS5w/+i+/jcAJ/AnbfKY5624BMZvfSuz3+n/jOO4lKiGAP\nPbRt3M+aiC94r5KZezg90W42VSlkBct+mbhCZYwEoQKBgQD/UBpIuayGS18pzuQ6\nWV5n/2od8Z3nP4MYs7PLdM4PdmN+l0ywupEIi/Nq+T6wvA0GYWdFIM3pvNCSWpki\njCng0e1OnjG7X0GdZDLGn1exBA/3Pap2LCto/7ckgJSxgM53Smht9RrSSXY6FyON\noS+jSuHRa34cHOIkGJpAO456CwKBgQD04x6u9jDsSGLYmar7XKJa0wUhEAwQ3Ctf\nQ4MEFVwbOTNBzEvdh9zWMXAdjRKvPEJuCgBzfLliTrVzNPGpoaWtjecyo+Bd54C+\n5Vvg5o5MzA1Z+q+/5fgnwTf2ED8k5L4K6uf86HEc2EVhPfLVUOXN+DD6URPMieU1\nZr5/Ju6bEQKBgFbnyUqgCR3dYhM1HXLPINd9lX2D1R/1+oXaBYVnyQxyXAOnNK+j\nkeK64Ky1EqXOHRDi7ugU9oJthwGKXT3pQAgK7SApsPv6vLb6eF4rtwnGPDkIgJGh\nD1W6VXjTW8nf8megqFNlby/NWbUEU1HOYAzRXHSQhmjDXCa1SSw8GY9pAoGAEB+g\nFo75G6WMdIxxmIk521cHgGzJDpcgd+4/AxbQ8K3sdQmZeSWH4cZxhlCSiV0jVpFs\nBC6TGijqg4JZ4vxUpz+vmEL389bZQDhju0QS3HWW73S0+6KNmzh6kcXyEmDJLnjW\n+2zmfaqzrrpgcbEY4F3WA7Uw44e0wrZYFpEeprECgYEA3+n46RtZbq1UhQlN3uPz\nPsKayLBvROy7MT/gdpcmIVfu312NOgdPYU+kK+3JX2CbDlaYxPGmT+33ElyI7AGO\nLoWya4ff7YPEh2LvbUuwxlknMa5MBrf1Ro6edpAsgL/mIFmt21y26e08SkApTP5G\nfAq9jHJAbwuMUcMKvVh4XSw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "robo-planilha@speedy-post-492300-k4.iam.gserviceaccount.com",
+  "client_id": "104631302269506541760",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/robo-planilha%40speedy-post-492300-k4.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
