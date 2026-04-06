@@ -1,13 +1,13 @@
 import streamlit as st
 import gspread
 
-# Configuração da página e título do projeto
+# Configurações de Título e Layout
 st.set_page_config(page_title="Pesquisa PIBIC - VOIDING AI LITE", layout="centered")
 st.title("Pesquisa: VOIDING AI LITE")
 
 # --- SEÇÃO 1: TCLE ---
 st.markdown("### TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO")
-st.info("Você está sendo convidado(a) como voluntário(a) a participar do estudo VOIDING AI LITE...")
+st.info("Você está sendo convidado(a) a participar do estudo sobre padrões miccionais em estudantes de medicina...")
 
 opcoes_tcle = ["Selecione...", "Aceito e sou maior de 18 anos", "Não aceito"]
 aceite_tcle = st.radio("Você concorda em participar?", opcoes_tcle)
@@ -34,24 +34,24 @@ elif aceite_tcle == "Aceito e sou maior de 18 anos":
         agua = st.number_input("Água por dia (ml)", min_value=0, step=100, value=None)
         cafeina = st.number_input("Cafeína por dia (ml)", min_value=0, step=50, value=None)
 
-        # 3. ICIQ-SF (Incontinência)
+        # 3. SINTOMAS (ICIQ-SF)
         st.header("3. Incontinência Urinária (ICIQ-SF)")
         iciq_3 = st.radio("Frequência da perda:", ["0 - Nunca", "1 - < 1x semana", "2 - 2-3x semana", "3 - 1x dia", "4 - Várias x dia", "5 - O tempo todo"])
         iciq_4 = st.radio("Quantidade da perda:", ["0 - Nenhuma", "2 - Pequena", "4 - Moderada", "6 - Grande"])
-        iciq_5 = st.slider("Interferência na vida diária (0-10):", 0, 10, 0)
+        iciq_5 = st.slider("Interferência na vida (0-10):", 0, 10, 0)
 
-        # 4. ICIQ-OAB (Bexiga Hiperativa)
+        # 4. BEXIGA (ICIQ-OAB)
         st.header("4. Bexiga Hiperativa (ICIQ-OAB)")
         oab_3a = st.radio("Frequência urinária diurna:", ["0 - 1-6x", "1 - 7-8x", "2 - 9-10x", "3 - 11-12x", "4 - 13x+"])
         oab_4a = st.radio("Vezes que levanta à noite:", ["0 - Nenhuma", "1 - Uma", "2 - Duas", "3 - Três", "4 - Quatro ou mais"])
 
-        # 5. PSS-10 (Estresse)
+        # 5. ESTRESSE (PSS-10)
         st.header("5. Percepção de Estresse (PSS-10)")
         op_pss = ["0 - Nunca", "1 - Quase nunca", "2 - Às vezes", "3 - Frequentemente", "4 - Muito"]
         pss_1 = st.selectbox("Sentiu-se chateado inesperadamente?", op_pss)
         pss_2 = st.selectbox("Incapaz de controlar coisas importantes?", op_pss)
 
-        # 6. PSQI-BR (Sono)
+        # 6. SONO (PSQI-BR)
         st.header("6. Qualidade do Sono (PSQI-BR)")
         psqi_1 = st.time_input("Hora de deitar:")
         psqi_2 = st.number_input("Minutos para adormecer:", min_value=0, value=None)
@@ -61,17 +61,18 @@ elif aceite_tcle == "Aceito e sou maior de 18 anos":
 
         if submit:
             try:
-                # CONEXÃO SEGURA
-                creds = dict(st.secrets["gcp_service_account"])
-                # Corrige quebras de linha da chave privada
-                if "\\n" in creds["private_key"]:
-                    creds["private_key"] = creds["private_key"].replace("\\n", "\n")
+                # --- LÓGICA DE CONEXÃO SEGURA ---
+                creds_dict = dict(st.secrets["gcp_service_account"])
                 
-                cliente = gspread.service_account_from_dict(creds)
+                # Garante que as quebras de linha da chave sejam lidas corretamente
+                if "\\n" in creds_dict["private_key"]:
+                    creds_dict["private_key"] = creds_dict["private_key"].replace("\\n", "\n")
+                
+                cliente = gspread.service_account_from_dict(creds_dict)
                 planilha = cliente.open_by_url("https://docs.google.com/spreadsheets/d/1FoXC3MIutbs0Ri4MxVKLf0E7fo91ODgTVx6au_P6NYU/edit?usp=sharing")
                 aba = planilha.sheet1
                 
-                # Montagem da linha
+                # Organização dos dados para a planilha
                 linha = [
                     str(doenca), str(idade), sexo, str(peso), str(altura), periodo, faculdade, estado, 
                     str(agua), str(cafeina), iciq_3, iciq_4, str(iciq_5), oab_3a, oab_4a, 
