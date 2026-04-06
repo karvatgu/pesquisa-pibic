@@ -14,10 +14,10 @@ O objetivo é avaliar a prevalência de distúrbios miccionais em estudantes de 
 Sua participação é voluntária e os dados são confidenciais.
 """)
 
-opcoes_tcle = ["Selecione...", "Aceito e sou maior de 18 anos", "Não aceito e/ou sou menor de 18 anos"]
+opcoes_tcle = ["Selecione...", "Aceito e sou maior de 18 anos", "Não aceito"]
 aceite_tcle = st.radio("Você concorda em participar desta pesquisa?", opcoes_tcle)
 
-if aceite_tcle == "Não aceito e/ou sou menor de 18 anos":
+if aceite_tcle == "Não aceito":
     st.warning("Agradecemos o seu interesse! A pesquisa é encerrada aqui.")
     st.stop()
 
@@ -32,7 +32,7 @@ elif aceite_tcle == "Aceito e sou maior de 18 anos":
         peso = st.number_input("Peso (kg)", min_value=30.0, step=0.1, value=None, placeholder="Ex: 70.5")
         altura = st.number_input("Altura em centímetros (Ex: 175)", min_value=100, max_value=250, step=1, value=None, placeholder="Ex: 175")
         periodo = st.selectbox("Período", [f"{i}º" for i in range(1, 13)])
-        faculdade = st.text_input("Faculdade")
+        faculdade = st.text_input("Em qual faculdade você estuda?")
         estado = st.selectbox("Estado", ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"])
 
         st.divider()
@@ -78,8 +78,7 @@ elif aceite_tcle == "Aceito e sou maior de 18 anos":
         if submit_button:
             with st.spinner("Conectando ao banco de dados e salvando..."):
                 try:
-                    # --- CONEXÃO INFALÍVEL COM JSON ---
-                    # Lê o texto cru do painel Secrets e transforma direto em credenciais
+                    # --- CONEXÃO INFALÍVEL COM JSON PURO ---
                     credenciais_json = json.loads(st.secrets["gcp_json"])
                     cliente = gspread.service_account_from_dict(credenciais_json)
                     
@@ -87,7 +86,6 @@ elif aceite_tcle == "Aceito e sou maior de 18 anos":
                     planilha = cliente.open_by_url(link_planilha)
                     aba = planilha.sheet1
                     
-                    # Organizando os dados para a planilha
                     nova_linha = [
                         str(doenca_previa), str(idade), str(sexo), str(peso), str(altura), 
                         str(periodo), str(faculdade), str(estado), str(hidratacao), str(cafeina), 
