@@ -1,5 +1,6 @@
 import streamlit as st
 import gspread
+import json
 
 # Configuração da página e título
 st.set_page_config(page_title="Pesquisa PIBIC - VOIDING AI LITE", layout="centered")
@@ -8,93 +9,94 @@ st.title("Pesquisa: VOIDING AI LITE")
 # --- SEÇÃO 1: TCLE ---
 st.markdown("### TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO")
 st.info("""
-Você está sendo convidado(a) como voluntário(a) a participar do estudo VOIDING AI LITE. 
-O objetivo é avaliar padrões miccionais e estresse em estudantes de medicina.
+Você está sendo convidado(a) como voluntário(a) a participar do estudo VOIDING AI LITE - PADRÕES MICCIONAIS E ESTRESSE EM ESTUDANTES DE MEDICINA. 
+O objetivo é avaliar a prevalência de distúrbios miccionais em estudantes de medicina.
+Sua participação é voluntária e os dados são confidenciais.
 """)
 
-opcoes_tcle = ["Selecione...", "Aceito e sou maior de 18 anos", "Não aceito"]
-aceite_tcle = st.radio("Você concorda em participar?", opcoes_tcle)
+opcoes_tcle = ["Selecione...", "Aceito e sou maior de 18 anos", "Não aceito e/ou sou menor de 18 anos"]
+aceite_tcle = st.radio("Você concorda em participar desta pesquisa?", opcoes_tcle)
 
-if aceite_tcle == "Não aceito":
-    st.warning("Pesquisa encerrada.")
+if aceite_tcle == "Não aceito e/ou sou menor de 18 anos":
+    st.warning("Agradecemos o seu interesse! A pesquisa é encerrada aqui.")
     st.stop()
 
 elif aceite_tcle == "Aceito e sou maior de 18 anos":
     with st.form("questionario_pibic"):
-        # 1. DADOS BÁSICOS
+        
+        # --- 1. DADOS BÁSICOS ---
         st.header("1. Dados Básicos")
-        doenca = st.radio("Diagnóstico prévio de doença urinária?", ["Não", "Sim"])
-        idade = st.number_input("Idade", min_value=18, max_value=100, step=1, value=None)
+        doenca_previa = st.radio("Possui diagnóstico prévio de doença no trato urinário?", ["Não", "Sim"])
+        idade = st.number_input("Idade", min_value=18, max_value=100, step=1, value=None, placeholder="Sua idade")
         sexo = st.selectbox("Sexo", ["Selecione", "Feminino", "Masculino"])
-        peso = st.number_input("Peso (kg)", min_value=30.0, step=0.1, value=None)
-        altura = st.number_input("Altura (cm)", min_value=100, max_value=250, step=1, value=None)
+        peso = st.number_input("Peso (kg)", min_value=30.0, step=0.1, value=None, placeholder="Ex: 70.5")
+        altura = st.number_input("Altura em centímetros (Ex: 175)", min_value=100, max_value=250, step=1, value=None, placeholder="Ex: 175")
         periodo = st.selectbox("Período", [f"{i}º" for i in range(1, 13)])
         faculdade = st.text_input("Faculdade")
         estado = st.selectbox("Estado", ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"])
 
-        # 2. HÁBITOS
+        st.divider()
+
+        # --- 2. HÁBITOS DE VIDA ---
         st.header("2. Hábitos de Vida")
-        agua = st.number_input("Água por dia (ml)", min_value=0, step=100, value=None)
-        cafeina = st.number_input("Cafeína por dia (ml)", min_value=0, step=50, value=None)
+        hidratacao = st.number_input("Água ingerida por dia (ml)", min_value=0, step=100, value=None, placeholder="Ex: 2000")
+        cafeina = st.number_input("Cafeína por dia em ml (café, energéticos):", min_value=0, step=50, value=None, placeholder="Ex: 250")
 
-        # 3. ICIQ-SF (Incontinência)
+        st.divider()
+
+        # --- 3. QUESTIONÁRIO ICIQ-SF ---
         st.header("3. Incontinência Urinária (ICIQ-SF)")
-        iciq_3 = st.radio("Frequência da perda:", ["0 - Nunca", "1 - < 1x semana", "2 - 2-3x semana", "3 - 1x dia", "4 - Várias x dia", "5 - O tempo todo"])
-        iciq_4 = st.radio("Quantidade da perda:", ["0 - Nenhuma", "2 - Pequena", "4 - Moderada", "6 - Grande"])
-        iciq_5 = st.slider("Interferência na vida (0-10):", 0, 10, 0)
+        iciq_3 = st.radio("Frequência que perde urina:", ["0 - Nunca", "1 - Uma vez por semana ou menos", "2 - 2-3 vezes por semana", "3 - Uma vez ao dia", "4 - Diversas vezes ao dia", "5 - O tempo todo"])
+        iciq_4 = st.radio("Quantidade que perde:", ["0 - Nenhuma", "2 - Pequena", "4 - Moderada", "6 - Grande"])
+        iciq_5 = st.slider("Interferência na vida diária (0-10):", 0, 10, 0)
+        
+        st.divider()
 
-        # 4. ICIQ-OAB (Bexiga Hiperativa)
+        # --- 4. QUESTIONÁRIO ICIQ-OAB ---
         st.header("4. Bexiga Hiperativa (ICIQ-OAB)")
-        oab_3a = st.radio("Frequência diurna:", ["0 - 1-6x", "1 - 7-8x", "2 - 9-10x", "3 - 11-12x", "4 - 13x+"])
-        oab_4a = st.radio("Vezes que levanta à noite:", ["0 - Nenhuma", "1 - Uma", "2 - Duas", "3 - Três", "4 - Quatro ou mais"])
+        oab_3a = st.radio("Frequência urinária diurna:", ["0 - 1-6x", "1 - 7-8x", "2 - 9-10x", "3 - 11-12x", "4 - 13x+"])
+        oab_4a = st.radio("Levanta à noite para urinar:", ["0 - Nenhuma", "1 - Uma", "2 - Duas", "3 - Três", "4 - Quatro ou mais"])
 
-        # 5. PSS-10 (Estresse)
+        st.divider()
+
+        # --- 5. QUESTIONÁRIO PSS-10 ---
         st.header("5. Percepção de Estresse (PSS-10)")
-        op_pss = ["0 - Nunca", "1 - Quase nunca", "2 - Às vezes", "3 - Frequentemente", "4 - Muito"]
-        pss_1 = st.selectbox("Sentiu-se chateado inesperadamente?", op_pss)
-        pss_2 = st.selectbox("Incapaz de controlar coisas importantes?", op_pss)
+        opcoes_pss = ["0 - Nunca", "1 - Quase nunca", "2 - Às vezes", "3 - Frequentemente", "4 - Muito frequentemente"]
+        pss_1 = st.selectbox("Sentiu-se chateado por algo inesperado?", opcoes_pss)
+        pss_2 = st.selectbox("Sentiu-se incapaz de controlar coisas importantes?", opcoes_pss)
 
-        # 6. PSQI-BR (Sono)
+        st.divider()
+
+        # --- 6. QUESTIONÁRIO PSQI-BR ---
         st.header("6. Qualidade do Sono (PSQI-BR)")
-        psqi_1 = st.time_input("Hora de deitar:")
-        psqi_2 = st.number_input("Minutos para adormecer:", min_value=0, value=None)
-        psqi_4 = st.number_input("Horas de sono real por noite:", min_value=0.0, step=0.5, value=None)
+        psqi_1 = st.time_input("Hora usual de deitar:")
+        psqi_2 = st.number_input("Minutos para adormecer:", min_value=0, value=None, placeholder="Ex: 30")
+        psqi_4 = st.number_input("Horas de sono real por noite:", min_value=0.0, step=0.5, value=None, placeholder="Ex: 7.0")
 
-        submit = st.form_submit_button("Finalizar e Enviar")
+        submit_button = st.form_submit_button(label="Finalizar e Enviar Respostas")
 
-        if submit:
-            try:
-                # --- CONEXÃO SEGURA VIA SECRETS ---
-                # Puxa os dados do "cofre" do Streamlit para não expor a senha no GitHub
-                s = st.secrets["gcp_service_account"]
+        if submit_button:
+            with st.spinner("Conectando ao banco de dados e salvando..."):
+                try:
+                    # --- CONEXÃO INFALÍVEL COM JSON ---
+                    # Lê o texto cru do painel Secrets e transforma direto em credenciais
+                    credenciais_json = json.loads(st.secrets["gcp_json"])
+                    cliente = gspread.service_account_from_dict(credenciais_json)
+                    
+                    link_planilha = "https://docs.google.com/spreadsheets/d/1FoXC3MIutbs0Ri4MxVKLf0E7fo91ODgTVx6au_P6NYU/edit?usp=sharing"
+                    planilha = cliente.open_by_url(link_planilha)
+                    aba = planilha.sheet1
+                    
+                    # Organizando os dados para a planilha
+                    nova_linha = [
+                        str(doenca_previa), str(idade), str(sexo), str(peso), str(altura), 
+                        str(periodo), str(faculdade), str(estado), str(hidratacao), str(cafeina), 
+                        str(iciq_3), str(iciq_4), str(iciq_5), str(oab_3a), str(oab_4a), 
+                        str(pss_1), str(pss_2), str(psqi_1), str(psqi_2), str(psqi_4)
+                    ]
+                    
+                    aba.append_row(nova_linha)
+                    st.success("Tudo certo! Suas respostas foram enviadas com sucesso.")
                 
-                creds_dict = {
-                    "type": s["type"],
-                    "project_id": s["project_id"],
-                    "private_key_id": s["private_key_id"],
-                    "private_key": s["private_key"].replace("\\n", "\n"),
-                    "client_email": s["client_email"],
-                    "client_id": s["client_id"],
-                    "auth_uri": s["auth_uri"],
-                    "token_uri": s["token_uri"],
-                    "auth_provider_x509_cert_url": s["auth_provider_x509_cert_url"],
-                    "client_x509_cert_url": s["client_x509_cert_url"]
-                }
-                
-                # Conecta ao Google Sheets
-                cliente = gspread.service_account_from_dict(creds_dict)
-                planilha = cliente.open_by_url("https://docs.google.com/spreadsheets/d/1FoXC3MIutbs0Ri4MxVKLf0E7fo91ODgTVx6au_P6NYU/edit?usp=sharing")
-                aba = planilha.sheet1
-                
-                # Prepara a linha para salvar
-                linha = [
-                    str(doenca), str(idade), sexo, str(peso), str(altura), periodo, faculdade, estado, 
-                    str(agua), str(cafeina), iciq_3, iciq_4, str(iciq_5), oab_3a, oab_4a, 
-                    pss_1, pss_2, str(psqi_1), str(psqi_2), str(psqi_4)
-                ]
-                
-                aba.append_row(linha)
-                st.success("Tudo certo! Suas respostas foram enviadas com sucesso.")
-            except Exception as e:
-                # Caso ocorra erro de chave, o app avisa aqui
-                st.error(f"Erro ao salvar: {e}")
+                except Exception as e:
+                    st.error(f"Erro ao salvar na planilha: {e}")
