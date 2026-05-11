@@ -1,0 +1,16 @@
+name: Keep App Alive
+
+# Configura quando o robô vai rodar
+on:
+  schedule:
+    # Roda todos os dias às 12:00 (UTC) / 09:00 no fuso horário de Brasília
+    - cron: "0 12 * * *" 
+  workflow_dispatch: # Permite que você rode o script manualmente, se quiser testar
+
+jobs:
+  ping-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Realizar um acesso automático ao site
+        # Substitua a URL abaixo pelo link real do seu app
+        run: curl -sL https://pesquisa-pibic-voidingia.streamlit.app/
