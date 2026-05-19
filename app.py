@@ -9,25 +9,32 @@ st.title("Pesquisa: VOIDING AI LITE")
 # --- SEÇÃO 1: TCLE ---
 st.markdown("### TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO")
 st.info("""
-Você está sendo convidado(a) como voluntário(a) a participar do estudo  “PADRÕES MICCIONAIS E ESTRESSE EM ESTUDANTES DE MEDICINA - UM ESTUDO ANALÍTICO TRANSVERSAL COM MODELAGEM PREDITIVA E REVISÃO DE LITERATURA”. Acreditamos que esta pesquisa seja importante porque investiga a relação entre o rigor da rotina acadêmica médica, o estresse e a saúde urinária, além de validar uma ferramenta tecnológica de triagem baseada em Inteligência Artificial.
+Você está sendo convidado(a) como voluntário(a) a participar do estudo “PADRÕES MICCIONAIS E ESTRESSE EM ESTUDANTES DE MEDICINA - UM ESTUDO ANALÍTICO TRANSVERSAL COM MODELAGEM PREDITIVA E REVISÃO DE LITERATURA”. Acreditamos que esta pesquisa seja importante porque investiga a relação entre o rigor da rotina acadêmica médica, o estresse e a saúde urinária, além de validar uma ferramenta tecnológica de triagem baseada em Inteligência Artificial.
+
 PARTICIPAÇÃO NO ESTUDO
 A sua participação consistirá em responder a questionários estruturados de forma online, incluindo: ICIQ-SF (incontinência urinária), ICIQ-OAB (bexiga hiperativa), PSQI-BR (qualidade do sono), PSS-10 (estresse percebido) e dados sobre hábitos de vida (consumo de cafeína e água). O tempo estimado para preenchimento é de 15 a 20 minutos.
+
 BENEFÍCIOS
 Ao final das respostas, você receberá um relatório individual de risco de disfunção miccional gerado por um modelo de inteligência artificial experimental. Este feedback serve como um alerta sobre a possível necessidade de buscar acompanhamento especializado. Nota importante: o relatório é uma ferramenta de triagem tecnológica e não substitui, sob nenhuma hipótese, um diagnóstico médico clínico realizado por profissional habilitado.
+
 RISCOS E MINIMIZAÇÃO
 Os riscos incluem possíveis danos psicossociais, como desconforto ou constrangimento ao responder perguntas sobre hábitos íntimos e sintomas urinários, além de riscos mínimos de quebra de sigilo digital. Para mitigar esses riscos:
-Os dados serão coletados de forma pseudoanonimizada, garantindo que sua identidade não seja exposta nos resultados finais.
-O banco de dados será armazenado em ambiente seguro com acesso restrito aos pesquisadores.
-Independência Acadêmica: É garantido que a sua participação, ou a recusa nela, não terá qualquer impacto em suas notas ou relacionamento com a instituição.
+- Os dados serão coletados de forma pseudoanonimizada, garantindo que sua identidade não seja exposta nos resultados finais.
+- O banco de dados será armazenado em ambiente seguro com acesso restrito aos pesquisadores.
+- Independência Acadêmica: É garantido que a sua participação, ou a recusa nela, não terá qualquer impacto em suas notas ou relacionamento com a instituição.
+
 SIGILO E AUTONOMIA
 Sua privacidade é nossa prioridade. Você tem total autonomia para desistir de responder a qualquer pergunta ou retirar seu consentimento em qualquer etapa da pesquisa, sem precisar se justificar. Seus dados individuais nunca serão publicados; apenas resultados agregados do grupo serão divulgados em eventos e periódicos científicos.
+
 RESSARCIMENTO E INDENIZAÇÃO
 A participação é voluntária. Caso ocorra qualquer gasto direto comprovado por sua parte devido a esta pesquisa, você será ressarcido. Se houver dano comprovado resultante diretamente de sua participação no estudo, você terá direito à indenização conforme os termos da Resolução CNS 466/12.
+
 CONTATO
 Pesquisador Responsável: Dr. Rogério de Fraga (PUCPR) – Telefone: (41) 99127-2194. E-mail: rogeriodefraga@gmail.com
 Comitê de Ética em Pesquisa (CEP/PUCPR): Telefone (41) 3271-2103 (Seg. a Sex., 08h às 17h30) ou e-mail: nep@pucpr.br.
+
 DECLARAÇÃO DE CONSENTIMENTO
-Ao clicar em "Aceito participar", você confirma que é maior de 18 anos, compreendeu os objetivos, riscos e benefícios deste estudo e aceita participar voluntariamente. Você pode salvar ou imprimir uma cópia deste termo agora mesmo.
+Ao clicar em "Aceito e sou maior de 18 anos", você confirma que é maior de 18 anos, compreendeu os objetivos, riscos e benefícios deste estudo e aceita participar voluntariamente. Você pode salvar ou imprimir uma cópia deste termo agora mesmo.
 
 """)
 
