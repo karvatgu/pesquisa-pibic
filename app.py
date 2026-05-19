@@ -8,8 +8,9 @@ st.title("Pesquisa: VOIDING AI LITE")
 
 # --- SEÇÃO 1: TCLE ---
 st.markdown("### TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO")
-st.info("""
-Você está sendo convidado(a) como voluntário(a) a participar do estudo “PADRÕES MICCIONAIS E ESTRESSE EM ESTUDANTES DE MEDICINA - UM ESTUDO ANALÍTICO TRANSVERSAL COM MODELAGEM PREDITIVA E REVISÃO DE LITERATURA”. Acreditamos que esta pesquisa seja importante porque investiga a relação entre o rigor da rotina acadêmica médica, o estresse e a saúde urinária, além de validar uma ferramenta tecnológica de triagem baseada em Inteligência Artificial.
+
+# Guardando o texto exato do seu TCLE nesta variável
+texto_tcle = """Você está sendo convidado(a) como voluntário(a) a participar do estudo “PADRÕES MICCIONAIS E ESTRESSE EM ESTUDANTES DE MEDICINA - UM ESTUDO ANALÍTICO TRANSVERSAL COM MODELAGEM PREDITIVA E REVISÃO DE LITERATURA”. Acreditamos que esta pesquisa seja importante porque investiga a relação entre o rigor da rotina acadêmica médica, o estresse e a saúde urinária, além de validar uma ferramenta tecnológica de triagem baseada em Inteligência Artificial.
 
 PARTICIPAÇÃO NO ESTUDO
 A sua participação consistirá em responder a questionários estruturados de forma online, incluindo: ICIQ-SF (incontinência urinária), ICIQ-OAB (bexiga hiperativa), PSQI-BR (qualidade do sono), PSS-10 (estresse percebido) e dados sobre hábitos de vida (consumo de cafeína e água). O tempo estimado para preenchimento é de 15 a 20 minutos.
@@ -35,8 +36,20 @@ Comitê de Ética em Pesquisa (CEP/PUCPR): Telefone (41) 3271-2103 (Seg. a Sex.,
 
 DECLARAÇÃO DE CONSENTIMENTO
 Ao clicar em "Aceito e sou maior de 18 anos", você confirma que é maior de 18 anos, compreendeu os objetivos, riscos e benefícios deste estudo e aceita participar voluntariamente. Você pode salvar ou imprimir uma cópia deste termo agora mesmo.
+"""
 
-""")
+# Mostra o texto na tela para o aluno ler
+st.info(texto_tcle)
+
+# --- O BOTÃO DE DOWNLOAD ---
+st.download_button(
+    label="📥 Baixar Cópia do Termo de Consentimento",
+    data=texto_tcle,
+    file_name="TCLE_Pesquisa_VOIDING_AI.txt",
+    mime="text/plain"
+)
+
+st.divider()
 
 opcoes_tcle = [
     "Selecione uma opção...", 
@@ -202,7 +215,7 @@ elif aceite_tcle == "Aceito e sou maior de 18 anos":
         psqi_5e = st.selectbox("5E) Tossiu ou roncou forte", opcoes_psqi_freq)
         psqi_5f = st.selectbox("5F) Sentiu frio", opcoes_psqi_freq)
         psqi_5g = st.selectbox("5G) Sentiu calor", opcoes_psqi_freq)
-        psqi_5h = st.selectbox("5H) Teve sonhos ruins", opcoes_psqi_freq)
+        psqi_5h = st.selectbox("5H) Teve sonhos ruins ou pesadelos", opcoes_psqi_freq)
         psqi_5i = st.selectbox("5I) Teve dor", opcoes_psqi_freq)
         
         opcoes_psqi_6 = ["Muito boa", "Boa", "Ruim", "Muito ruim"]
